@@ -19,6 +19,11 @@ provider:
   profile: JavierBravo
   region: eu-west-1
   stage: dev
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "sqs:*"
+      Resource: "arn:aws:sqs:eu-west-1:430404216840:serverless-demo"
 
 # you can overwrite defaults here
 #  stage: dev
@@ -54,6 +59,8 @@ functions:
       - http:
           path: greet
           method: GET
+  pushToSqs:
+    handler: handler.push_to_sqs
 
 #   you can add any of the following events
 #    events:
